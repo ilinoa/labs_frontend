@@ -1,0 +1,14 @@
+@import '../../styles/theme';
+.container {
+  h2 {
+    @include h2;
+  }
+
+  .list {
+    @include list;
+
+    .item {
+      @include item;
+    }
+  }
+}

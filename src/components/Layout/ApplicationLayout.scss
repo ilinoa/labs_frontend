@@ -1,0 +1,60 @@
+@import '../../styles/theme';
+
+.container {
+  background-color: $backgroundColor;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  header {
+    position: fixed;
+    height: 4rem;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: $headerColor;
+
+    color: $white;
+
+    font-size: 1.5rem;
+    opacity: .7;
+
+    .main {
+      padding: 0 2rem;
+      height: 100%;
+
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+
+      text-decoration: none;
+      color: inherit;
+
+      h1 {
+        margin: 0;
+        font-weight: 400;
+
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  section.paper {
+    margin-top: 5rem;
+    padding: 1rem;
+
+    width: 50rem;
+
+    background-color: $plainWhite;
+    border-radius: 5px;
+    @include withBoxShadow;
+
+    @media screen and (max-width: 768px) {
+      width: 90%;
+    }
+  }
+}

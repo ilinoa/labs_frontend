@@ -1,0 +1,9 @@
+.fieldset {
+  display: flex;
+  flex-direction: column;
+
+  field {
+    display: flex;
+    justify-content: space-around;
+  }
+}

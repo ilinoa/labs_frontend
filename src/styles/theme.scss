@@ -1,0 +1,57 @@
+$backgroundColor: #eeeeef;
+$white: $backgroundColor;
+$plainWhite: #fff;
+$headerColor: #1B2534;
+$labelColor: #3B4356;
+$hoverBackground: linear-gradient(to right, rgba(255, 0, 255, 0.1), rgba(0,0,0,0));
+
+@mixin applicationFont () {
+  font-size: 13px;
+  font-family: source-sans-pro, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+}
+
+@mixin withBoxShadow () {
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+@mixin list () {
+  font-size: 1.2rem;
+  width: 100%;
+  list-style-type: none;
+  font-weight: 300;
+
+  > ul {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@mixin h2 () {
+  color: $labelColor;
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+@mixin item () {
+  padding: 1rem;
+  margin-bottom: .5rem;
+
+  height: 1.5rem;
+  width: 70%;
+
+  display: flex;
+  align-items: center;
+
+  border-radius: 3px;
+  background: rgba(0,0,0,0);
+
+  &:hover {
+    background: $hoverBackground;
+  }
+
+  > a {
+    color: $labelColor;
+    text-decoration: none;
+  }
+}

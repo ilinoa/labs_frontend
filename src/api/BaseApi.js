@@ -1,4 +1,4 @@
-import config from '../../config.json';
+import config from '../config.json';
 import {JSON_REQUEST, MULTIPART_REQUEST} from './helpers/requestTypes';
 import {HTTP_OK} from './helpers/httpStatuses';
 import {GET, PUT, POST, DELETE} from './helpers/httpMethods';
@@ -13,8 +13,8 @@ export default class BaseApi {
     throw Error('You should implement apiName method in child class');
   }
 
-  async getRequest(path, {params}) {
-    return await this.makeRequest(GET, path, {params})
+  async getRequest(path, {params, data}) {
+    return await this.makeRequest(GET, path, {params, data})
   }
 
   async postRequest(path, {data, params, files}) {
@@ -49,19 +49,19 @@ export default class BaseApi {
   }
 
   async makeRequest(method, path, data = {}, type = JSON_REQUEST) {
-    const headers = {
+    const headers = type === JSON_REQUEST 
+    ? {
       'Accept': type,
       'Content-Type': type,
-    };
+    }
+    : {};
     const query = BaseApi.queryParams(data.params);
-    const response = await fetch(
-      `${this._apiBaseUrl}/${this.apiName}/${path}${query ? `?${query}` : ''}`,
-      {
-        method,
-        headers,
-        credentials: 'include',
-        body: data.data,
-      });
+    const params = {
+      method,
+      headers,
+      body: data.data,
+    };
+    const response = await fetch(`${this._apiBaseUrl}/${this.apiName}/${path}${query && query.length ? `?${query}` : ''}`,params);
 
     const result = await BaseApi.getResultFromResponse(response);
     return result;
@@ -76,18 +76,18 @@ export default class BaseApi {
   static async getResultFromResponse(response) {
     const json = await response.json();
 
-    if (json.status !== HTTP_OK) {
-      throw new ApiError(json);
-    }
+    return json;
+  }
 
-    return json.result;
+  static numberizeValues(val) {
+    return Number(val)
   }
 
   static getFormData(data, files) {
     const formData = new FormData();
 
     const dataKeys = data && Object.keys(data);
-    if (dataKeys.length) {
+    if (dataKeys && dataKeys.length) {
       dataKeys.map(key => {
         formData.append(key, data[key]);
         return null;
@@ -96,9 +96,9 @@ export default class BaseApi {
 
     const filesKeys = files && Object.keys(files);
 
-    if (filesKeys.length) {
+    if (filesKeys && filesKeys.length) {
       filesKeys.map(key => {
-        formData.append(key, data[key]);
+        formData.append(key, files[key]);
         return null;
       });
     }

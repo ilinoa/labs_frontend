@@ -1,0 +1,9 @@
+@import '../../styles/theme';
+
+.button {
+  width: 2rem;
+  height: 2rem;
+  background: url(/public/assets/controls/back.png);
+
+  cursor: pointer;
+}
