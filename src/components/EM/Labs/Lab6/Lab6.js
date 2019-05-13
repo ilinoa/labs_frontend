@@ -17,7 +17,7 @@ export default class Lab6 extends Component {
   }
 
   handleStart = () => {
-    this.map.start(this.renderCities, 500, 1000, this.handleChangeAntPosition);
+    this.map.start(this.renderCities, 0, 1000, this.handleChangeAntPosition);
   }
 
   handleChangeAntPosition = (position, id) => {

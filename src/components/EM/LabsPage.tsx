@@ -6,8 +6,8 @@ import useInternalSelector from '../../hooks/use-internal-selector';
 import Lab1 from './Labs/Lab1';
 import Lab2 from './Labs/Lab2';
 import Lab3 from './Labs/Lab3';
+import Lab5 from './Labs/Lab5';
 import Lab6 from './Labs/Lab6/Lab6';
-import LabsPageItem from './LabsPageItem'
 
 interface IProps {
 
@@ -17,6 +17,7 @@ const tabs = [
     Lab1,
     Lab2,
     Lab3,
+    Lab5,
     Lab6,
 ];
 
@@ -38,7 +39,7 @@ export default (props: IProps) => {
         <div className={styles.container}>
             <h2>{loc('labs')}</h2>
             <div className={styles.list}>
-                <ul>{_.range(1, 5).map(renderLab)}</ul>
+                <ul>{_.range(1, 6).map(renderLab)}</ul>
             </div>
         </div>
     );
